@@ -2,16 +2,16 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import load
 
 def main():
 	''' Load dataframe from csv file'''
 
 	filename = 'trainingLog.csv'
-	df = pd.read_csv(filename, index_col=0, parse_dates=True, header=1)
-	df = df.drop(df.index[0])
-
-	weight(df)
+	
+	df = load.to_df(filename)
+	#print(df)
+	power(df)
 
 	return
 
@@ -33,6 +33,24 @@ def weight(df):
 
 	return
 
+
+def power(df):
+	''' Plot power data'''
+
+	variable = 'Average Power (W)'
+
+	#df = df[variable].dropna()
+	#print(df)
+	df[variable].dropna().plot(marker='.', linewidth=1, color='r')
+
+	plt.title(variable + ' changes over time')
+	plt.xlabel('Date')
+	plt.ylabel(variable)
+
+	plt.savefig('power.png')
+	plt.close()
+
+	return
 
 if __name__ == '__main__':
 	main()

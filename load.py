@@ -12,13 +12,13 @@ def main():
 
 	file_name = "trainingLog.csv"
 
-	#df = to_csv(file_name)
+	df = to_df(file_name)
 	#print(df)
 
-	to_db(file_name)
+	#to_db(file_name)
 
 
-def to_csv(fileName):
+def to_df(fileName):
 	''' Loads the Training Log .csv file as a Pandas dataframe'''
 
 	# Read the Training Log .csv file, make the column the index, use headers in row 1
