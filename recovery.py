@@ -13,51 +13,29 @@ def main():
 	
 	df = load.to_df(filename)
 	#print(df)
-	power(df)
+	hrv(df)
 
 	return
 
 
-def weight(df):
-	''' Plot weight data'''
+def hrv(df):
+	''' Plot HRV data'''
 
-	metric = "Weight (pounds)"
+	metric = "HRV"
 	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=metric)	
-	print(pv)
+	#print(pv)
 	pv.plot(marker='.', linewidth=1)
 	plt.title('Year-Over-Year Comparison')
 	plt.xlabel('Month')
 	plt.ylabel(metric)
 	#plt.show()
 
-	os.chdir('../static')
-	plt.savefig('weight.png')
+	os.chdir('./static')
+	plt.savefig('hrv.png')
 	plt.close()
 	os.chdir('..')
 
 	return
-
-
-def power(df):
-	''' Plot power data'''
-
-	variable = 'Average Power (W)'
-
-	#df = df[variable].dropna()
-	#print(df)
-	df[variable].dropna().plot(marker='.', linewidth=1, color='r')
-
-	plt.title(variable + ' changes over time')
-	plt.xlabel('Date')
-	plt.ylabel(variable)
-
-	os.chdir('../static')
-	plt.savefig('power.png')
-	plt.close()
-	os.chdir('..')
-
-	return
-
 
 
 if __name__ == '__main__':

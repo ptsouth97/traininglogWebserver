@@ -22,6 +22,10 @@ def weight():
 def power():
 	return render_template('power.html')
 
+@app.route('/recovery')
+def recovery():
+	return render_template('recovery.html')
+
 @app.route('/css')
 def css():
 	return render_template('css.html')
