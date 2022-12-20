@@ -14,6 +14,10 @@ Bootstrap(app)
 def index():
 	return render_template('index.html')
 
+@app.route('/runstats')
+def runstats():
+	return render_template('runstats.html')
+
 @app.route('/weight')
 def weight():
 	return render_template('weight.html')
