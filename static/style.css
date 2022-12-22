@@ -18,14 +18,7 @@ body{
         border-left: 1px solid #CCCCCC;
 }
 
-div{
-		height: auto;
-		background: rgb(170, 138, 172);
-		border: 10px groove rgb(77, 0, 80)
-		color: rgb(77, 0, 80);
-}
-
-img{
+.parent{
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
