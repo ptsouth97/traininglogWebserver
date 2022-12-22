@@ -7,6 +7,7 @@ from flask_mysqldb import MySQL
 # instanstiate a flask object called app with name of application as first parameter
 app = Flask(__name__)
 Bootstrap(app)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 
 
 # app object has a route decorator to handle a request that comes to the end point '/'
@@ -33,6 +34,16 @@ def recovery():
 @app.route('/css')
 def css():
 	return render_template('css.html')
+
+# No caching at all for API endpoints.
+@app.after_request
+def add_header(response):
+	# response.cache_control.no_store = True
+	response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+	response.headers['Pragma'] = 'no-cache'
+	response.headers['Expires'] = '-1'
+	return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5001)

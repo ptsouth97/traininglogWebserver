@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 	{% block body %}
 		<h1> Power </h1>
-		<img src={{url_for('static',filename="power.png")}} />
+		<div class="img">
+			<img src={{url_for('static', filename="Average Power (W) changes over time.png")}} />	
+			<img src={{url_for('static', filename="Efficiency Factor changes over time.png")}} />
+			<img src={{url_for('static', filename="Intensity Factor changes over time.png")}} />
+			<img src={{url_for('static', filename="test.png")}} />
+		</div>
 		<h3> <a href="/"class="button">HOME</a></h3>
 	{% endblock %}
 
