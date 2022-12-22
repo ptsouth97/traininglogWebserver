@@ -24,12 +24,12 @@ def year_over_year(df, variable, color):
 	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=variable)	
 
 	pv.plot(marker='.', linewidth=1)
-	plt.title(variable + 'Year-Over-Year Comparison')
+	plt.title(variable + ' Year-Over-Year Comparison')
 	plt.xlabel('Month')
 	plt.ylabel(variable)
 
 	os.chdir('./static')
-	plt.savefig(variable + 'Year-Over_Year Comparison.png')
+	plt.savefig(variable + ' Year-Over-Year Comparison.png')
 	plt.close()
 	os.chdir('..')
 

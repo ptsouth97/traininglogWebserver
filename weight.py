@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import load
 import os
+import data_manipulations
 import plot
 
 
@@ -13,29 +14,18 @@ def main():
 	filename = 'trainingLog.csv'
 	
 	df = load.to_df(filename)
-
-	hrv(df)
-	rhr(df)	
-
+	
+	weight(df)
+	
 	return
 
 
-def hrv(df):
-	''' Plot HRV data'''
+def weight(df):
+	''' Plot weight data year-over-year'''
 
-	metric = "HRV"
+	variable = 'Weight (pounds)'
 
-	plot.year_over_year(df, metric, 'r')
-
-	return
-
-
-def rhr(df):
-	''' Plot RHR data'''
-
-	metric = "RHR"
-
-	plot.year_over_year(df, metric, 'g')
+	plot.year_over_year(df, variable, 'r')
 
 	return
 
