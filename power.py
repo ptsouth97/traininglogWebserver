@@ -18,6 +18,7 @@ def main():
 	avgPower(df)
 	efficiencyFactor(df)
 	intensityFactor(df)
+	efficiencyFactorByRunType(df)
 
 	return
 
@@ -79,7 +80,7 @@ def efficiencyFactorByRunType(df):
 	plt.ylabel(variable)
 
 	os.chdir('./static')
-	plt.savefig('test.png')
+	plt.savefig('Efficiency Factor by run type changes over time.png')
 	plt.close()
 	os.chdir('..')
 

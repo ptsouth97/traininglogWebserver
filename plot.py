@@ -45,10 +45,10 @@ def single_variable_time_series(df, variable, color):
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
-	os.chdir('./static')
-	plt.savefig(variable + ' changes over time.png')
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + variable + " changes over time.png")
 	plt.close()
-	os.chdir('..')
+	#os.chdir("/home/ocros03/Website/")
 
 	return
 

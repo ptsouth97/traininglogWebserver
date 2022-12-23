@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import load
 import os
 import data_manipulations
-
+import plot
 
 def main():
 	''' Load dataframe from csv file'''
@@ -20,6 +20,7 @@ def main():
 	#df = data_manipulations.select_run_type(df, [run_type])
 
 	hr(df)
+	pace(df)
 
 	return
 
@@ -27,19 +28,9 @@ def main():
 def hr(df):
 	''' Plot heart rate data'''
 
-	variable = 'GARMIN Average HR (bpm)'
+	variable = "GARMIN Average HR (bpm)"
 
-	df[variable].dropna().plot(marker='.', linewidth=1, color='r')
-
-	plt.title(variable + ' changes over time')
-	plt.xlabel('Date')
-	plt.ylabel(variable)
- 
-	os.chdir('./static')
-	plt.savefig('hr.png')
-	plt.close()
-	os.chdir('..')
-
+	plot.single_variable_time_series(df, variable, 'r')
 
 	return
 
@@ -47,34 +38,11 @@ def hr(df):
 def pace(df):
 	''' Plot pace data'''
 
-	variable = 'Average Pace (min/mile)'
+	df = data_manipulations.convert_pace(df)
 
-	df = df[variable].dropna()
-	print(df)
-	df[variable].plot(marker='.', linewidth=1, color='r')
+	variable = "Pace (min per mile)"
 
-	plt.title(variable + ' changes over time')
-	plt.xlabel('Date')
-	plt.ylabel(variable)
- 
-	os.chdir('../static')
-	plt.savefig('pace.png')
-	plt.close()
-	os.chdir('..')
-
-	'''metric = "Average Pace (min/mile)"
-	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=metric)	
-	#print(pv)
-	pv.plot(marker='.', linewidth=1)
-	plt.title('Year-Over-Year Comparison')
-	plt.xlabel('Month')
-	plt.ylabel(metric)
-	#plt.show()
-
-	os.chdir('./static')
-	plt.savefig('pace.png')
-	plt.close()
-	os.chdir('..')'''
+	plot.single_variable_time_series(df, variable, 'g')
 
 	return
 

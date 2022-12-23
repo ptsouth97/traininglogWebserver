@@ -25,12 +25,12 @@ def select_run_type(df, run_type):
 
 
 def convert_pace(df):
-	''' converts 0:8:00 min/mile to 8.0 min/mile'''
+	''' converts 0:8:30 min/mile to 8.5 min/mile'''
 
 	df['datetime'] = pd.to_datetime(df['Average Pace (min/mile)'])
 	df['minutes'] = df['datetime'].dt.minute
 	df['seconds'] = (df['datetime'].dt.second)/60
-	df['Pace (min/mile)'] = round(df['minutes'] + df['seconds'], 2)
+	df['Pace (min per mile)'] = round(df['minutes'] + df['seconds'], 2)
 
 	return df
 

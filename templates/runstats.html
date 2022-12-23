@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 	{% block body %}
-		<h1> Recovery </h1>
-		<img src={{url_for('static',filename="hr.png")}} />
+		<h1> Running Statistics </h1>
+		<div class="parent">
+			<div>
+				<img src={{url_for('static',filename="GARMIN Average HR (bpm) changes over time.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename="Pace (min per mile) changes over time.png")}} />
+			</div>
+		</div>
 		<h3> <a href="/"class="button">HOME</a></h3>
 	{% endblock %}
 
