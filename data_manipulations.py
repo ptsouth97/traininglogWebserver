@@ -16,6 +16,14 @@ def main():
 	return
 
 
+def filter_dates(df, start, end):
+	''' Selects a range of dates based on user input'''
+
+	df = df.loc[start:end]
+
+	return df
+
+
 def select_run_type(df, run_type):
 	''' select specific type of run only from dataframe'''
 
