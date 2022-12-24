@@ -41,6 +41,15 @@ def single_variable_time_series(df, variable, color):
 
 	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
 
+	df['SMA_30'] = df[variable].rolling(30, min_periods=15).mean()
+	df['SMA_30'].plot(legend=True)
+
+	#plt.style.use('ggplot')
+	#plt.figure(facecolor="yellow")
+
+	#ax = plt.axes()
+	#ax.set_facecolor("violet")
+	
 	plt.title(variable + ' changes over time')
 	plt.xlabel('Date')
 	plt.ylabel(variable)

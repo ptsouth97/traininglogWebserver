@@ -31,9 +31,9 @@ def power():
 def recovery():
 	return render_template('recovery.html')
 
-@app.route('/css')
-def css():
-	return render_template('css.html')
+@app.route('/regression')
+def regression():
+	return render_template('regression.html')
 
 # No caching at all for API endpoints.
 @app.after_request

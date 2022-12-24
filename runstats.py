@@ -19,10 +19,10 @@ def main():
 	#run_type = "Recovery"
 	#df = data_manipulations.select_run_type(df, [run_type])
 
-	#hr(df)
+	hr(df)
 	#pace(df)
-	pace_by_run_type(df)
-
+	#pace_by_run_type(df)
+	
 	return
 
 
@@ -75,6 +75,7 @@ def pace_by_run_type(df):
 	plt.close()
 
 	return
+
 
 if __name__ == '__main__':
 	main()
