@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-from sqlalchemy import create_engine, MetaData, Table, Column, String, select
+#from sqlalchemy import create_engine, MetaData, Table, Column, String, select
 import pandas as pd
+import os
+#import requests
 
 # Download Google sheet
 # curl -L "https://docs.google.com/spreadsheets/d/e/2PACX-1vQXXuvN0QK1QYnHdCKAXd11jaUO3WJ_Yc7_6PrZ6TFhJMENGFURk-Yz7AqTarYmeGaz50Xbj5ef-_7Q/pub?gid=1105825653&single=true&output=csv" > ./trainingLog.csv
@@ -10,12 +12,22 @@ import pandas as pd
 def main():
 	''' main function'''
 
+	get_url()
+
 	file_name = "trainingLog.csv"
 
 	df = to_df(file_name)
 	#print(df)
 
 	#to_db(file_name)
+
+
+def get_url():
+	''' downloads google sheet to .csv'''
+
+	os.system("sh script.sh")
+		
+	return
 
 
 def to_df(fileName):
