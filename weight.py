@@ -16,6 +16,7 @@ def main():
 	df = load.to_df(filename)
 	
 	weight(df)
+	calories(df)
 	
 	return
 
@@ -25,7 +26,17 @@ def weight(df):
 
 	variable = 'Weight (pounds)'
 
-	plot.year_over_year(df, variable, 'r')
+	plot.year_over_year(df, variable)
+
+	return
+
+
+def calories(df):
+	''' Plot calorie data year-over-year'''
+
+	variable = 'Calories consumed'
+
+	plot.year_over_year(df, variable)
 
 	return
 

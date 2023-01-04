@@ -43,6 +43,18 @@ def convert_pace(df):
 	return df
 
 
+def convert_sleep(df):
+	''' converts 8:30:00 hours of sleep to 8.5 hours of sleep'''
+
+	df['datetime'] = pd.to_datetime(df['WHOOP Total Hours of Sleep'])
+	df['hours'] = df['datetime'].dt.hour
+	df['minutes'] = (df['datetime'].dt.minute)/60
+	df['seconds'] = (df['datetime'].dt.second)/60/60
+	df['Total Hours of Sleep'] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
+
+	return df
+
+
 def two_variable_correlation(df, variable1, variable2):
 	''' Plots one variable versus another to test correlation'''
 

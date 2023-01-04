@@ -35,6 +35,10 @@ def recovery():
 def regression():
 	return render_template('regression.html')
 
+@app.route('/scatter')
+def scatter():
+	return render_template('scatter.html')
+
 # No caching at all for API endpoints.
 @app.after_request
 def add_header(response):

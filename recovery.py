@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import load
 import os
 import plot
+import data_manipulations
 
 
 def main():
@@ -14,8 +15,9 @@ def main():
 	
 	df = load.to_df(filename)
 
-	hrv(df)
-	rhr(df)	
+	#hrv(df)
+	#rhr(df)	
+	sleep(df)
 
 	return
 
@@ -25,7 +27,7 @@ def hrv(df):
 
 	metric = "HRV"
 
-	plot.year_over_year(df, metric, 'r')
+	plot.year_over_year(df, metric)
 
 	return
 
@@ -35,7 +37,19 @@ def rhr(df):
 
 	metric = "RHR"
 
-	plot.year_over_year(df, metric, 'g')
+	plot.year_over_year(df, metric)
+
+	return
+
+
+def sleep(df):
+	''' Plot WHOOP total sleep data'''
+
+	metric = "Total Hours of Sleep"
+
+	df = data_manipulations.convert_sleep(df)
+
+	plot.year_over_year(df, metric)
 
 	return
 
