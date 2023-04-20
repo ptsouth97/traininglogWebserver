@@ -68,17 +68,21 @@ def powerVariableByRunType(df, variable):
 	runtype1 = ["Recovery"]
 	df1 = data_manipulations.select_run_type(df, runtype1)
 
-	runtype2 = ["Long run"]
+	runtype2 = ["Long run","Medium long"]
 	df2 = data_manipulations.select_run_type(df, runtype2)
 
 	runtype3 = ["General aerobic"]
 	df3 = data_manipulations.select_run_type(df, runtype3)
 	
+	runtype4 = ["Threshold"]
+	df4 = data_manipulations.select_run_type(df, runtype4)
+
 	fig = plt.figure()
 
 	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
 	ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label="Long runs")
 	ax1 = df3[variable].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
+	ax1 = df4[variable].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
 
 	plt.title(variable + ' changes over time')
 	plt.xlabel('Date')
