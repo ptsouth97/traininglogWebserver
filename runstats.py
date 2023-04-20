@@ -20,8 +20,8 @@ def main():
 	#df = data_manipulations.select_run_type(df, [run_type])
 
 	hr(df)
-	#pace(df)
-	#pace_by_run_type(df)
+	pace(df)
+	pace_by_run_type(df)
 	
 	return
 

@@ -15,8 +15,8 @@ def main():
 	
 	df = load.to_df(filename)
 
-	#hrv(df)
-	#rhr(df)	
+	hrv(df)
+	rhr(df)	
 	sleep(df)
 
 	return

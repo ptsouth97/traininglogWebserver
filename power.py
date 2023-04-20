@@ -18,7 +18,7 @@ def main():
 	avgPower(df)
 	efficiencyFactor(df)
 	intensityFactor(df)
-	efficiencyFactorByRunType(df)
+	powerVariableByRunType(df, "Average Power (W)")
 
 	return
 
@@ -57,30 +57,35 @@ def intensityFactor(df):
 	return
 
 
-def efficiencyFactorByRunType(df):
+def powerVariableByRunType(df, variable):
 	''' Average Power divided by Average Heart Rate sorted by run type'''
 
-	variable = 'Efficiency Factor by run type'
-
-	df[variable] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
+	#variable = 'Efficiency Factor by run type'
+	
+	if variable == "Efficiency Factor by run type":
+		df[variable] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
 
 	runtype1 = ["Recovery"]
 	df1 = data_manipulations.select_run_type(df, runtype1)
 
 	runtype2 = ["Long run"]
 	df2 = data_manipulations.select_run_type(df, runtype2)
+
+	runtype3 = ["General aerobic"]
+	df3 = data_manipulations.select_run_type(df, runtype3)
 	
 	fig = plt.figure()
 
 	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
 	ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label="Long runs")
+	ax1 = df3[variable].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
 
 	plt.title(variable + ' changes over time')
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
 	os.chdir('./static')
-	plt.savefig('Efficiency Factor by run type changes over time.png')
+	plt.savefig(variable + ' by run type.png')
 	plt.close()
 	os.chdir('..')
 
