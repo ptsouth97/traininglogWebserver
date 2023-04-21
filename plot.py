@@ -13,7 +13,9 @@ def main():
 	
 	df = load.to_df(filename)
 	#print(df)
-	power(df)
+	#power(df)
+
+	overlay_time_series(df, 'HRV', 'Training Load')
 
 	return
 
@@ -62,6 +64,34 @@ def single_variable_time_series(df, variable, color):
 
 	return
 
+
+def overlay_time_series(df, variable1, variable2):
+	''' Plot two variables on the same y-axis scale'''
+
+	fig, ax1 = plt.subplots()
+
+	ax1.plot(df.index, df['HRV'], marker='.', linewidth=1, color='blue')
+	ax1.set_ylabel(variable1, color='blue')
+	ax1.tick_params(axis='y', labelcolor='blue')
+	
+	plt.xticks(rotation=70)
+
+	# Instantiate a second axis that shares the same x-axis
+	ax2 = ax1.twinx()
+	ax2.plot(df.index, df['Training Load'], marker='.', linewidth=1, color='red')
+	ax2.set_ylabel(variable2, color='red')
+	ax2.tick_params(axis='y', labelcolor='red')
+
+	plt.title(variable1 + "-" + variable2 + " Overlay")
+	plt.xlabel('Date')
+
+	fig.tight_layout()
+
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + variable1 + "-" + variable2 + " overlay.png")
+	plt.close() 
+	
+	return
 
 
 if __name__ == '__main__':
