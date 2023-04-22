@@ -57,6 +57,8 @@ def single_variable_time_series(df, variable, color):
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
+	plt.tight_layout()
+
 	path = "/home/ocros03/Website/static/"
 	plt.savefig(path + variable + " changes over time.png")
 	plt.close()

@@ -22,11 +22,12 @@ def main():
 
 
 def weight(df):
-	''' Plot weight data year-over-year'''
+	''' Plot weight data times series and year-over-year'''
 
 	variable = 'Weight (pounds)'
 
 	plot.year_over_year(df, variable)
+	plot.single_variable_time_series(df, variable, "orange")
 
 	return
 
@@ -37,6 +38,7 @@ def calories(df):
 	variable = 'Calories consumed'
 
 	plot.year_over_year(df, variable)
+	plot.single_variable_time_series(df, variable, "purple")
 
 	return
 
