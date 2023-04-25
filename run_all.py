@@ -18,7 +18,7 @@ def main():
 	''' Load dataframe from csv file'''
 
 	# Download latest Google Sheet data as a csv file
-	load.get_url()
+	#load.get_url()
 
 	# Load csv file to a pandas dataframe
 	filename = 'trainingLog.csv'
@@ -50,8 +50,7 @@ def run_stats(df):
 	print("Calculating run stats...")
 	runstats.hr(df)
 	runstats.pace(df)
-	#runstats.by_run_type(df, "GARMIN Average HR (bpm)")
-	
+		
 	return
 
 

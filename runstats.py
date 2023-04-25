@@ -21,7 +21,6 @@ def main():
 
 	hr(df)
 	pace(df)
-	by_run_type(df)
 	
 	return
 
@@ -46,35 +45,9 @@ def pace(df):
 
 	plot.single_variable_time_series(df, variable, 'g')
 	plot.multi_variable_time_series(df, variable)
+
+	df = data_manipulations.select_run_type(df, ["Medium long"])
 	plot.year_over_year(df, variable)
-
-	return
-
-
-def by_run_type(df, variable):
-	''' Plot data by the type of run'''
-	
-	if variable == "Pace (min per mile)":
-		df = data_manipulations.convert_pace(df)
-	
-	runtype1 = "Recovery"
-	df1 = data_manipulations.select_run_type(df, [runtype1])
-	
-	runtype2 = "Threshold"
-	df2 = data_manipulations.select_run_type(df, [runtype2])
-	
-	fig = plt.figure()
- 
-	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label=runtype1)
-	ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label=runtype2)
-
-	plt.title(variable + ' Comparison by run type')
-	plt.xlabel('Date')
-	plt.ylabel(variable)
-
-	path = "/home/ocros03/Website/static/"
-	plt.savefig(path + variable + " Comparison by run type.png")
-	plt.close()
 
 	return
 

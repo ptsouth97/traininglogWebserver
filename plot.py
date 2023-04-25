@@ -71,6 +71,9 @@ def single_variable_time_series(df, variable, color):
 def multi_variable_time_series(df, variable):
 	''' Plot data by the type of run'''
 	
+	# Turn off SettingWithCopyWarning (dataquest.io)
+	pd.set_option('mode.chained_assignment', None)
+	
 	if variable == "Pace (min per mile)":
 		df = data_manipulations.convert_pace(df)
 	
@@ -79,7 +82,14 @@ def multi_variable_time_series(df, variable):
 	
 	runtype2 = "Threshold"
 	df2 = data_manipulations.select_run_type(df, [runtype2])
+
+	runtype3 = "Long run"
+	df3 = data_manipulations.select_run_type(df, [runtype3])
+
+	runtype4 = "General aerobic"
+	df4 = data_manipulations.select_run_type(df, [runtype4])
 	
+
 	fig = plt.figure()
  
 	#ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label=runtype1)
@@ -90,6 +100,12 @@ def multi_variable_time_series(df, variable):
 
 	df2[runtype2] = df2[variable].rolling(30, min_periods=15).mean()
 	ax1 = df2[runtype2].plot(legend=True)
+
+	df3[runtype3] = df3[variable].rolling(30, min_periods=15).mean()
+	ax1 = df3[runtype3].plot(legend=True)
+
+	df4[runtype4] = df4[variable].rolling(30, min_periods=15).mean()
+	ax1 = df4[runtype4].plot(legend=True)
 
 	plt.title(variable + ' SMA-30 Comparison by run type')
 	plt.xlabel('Date')
@@ -130,6 +146,42 @@ def overlay_time_series(df, variable1, variable2):
 	
 	return
 
+'''
+def by_run_type(df, variable):
+	 Plot data by the type of run
+	
+	if variable == "Pace (min per mile)":
+		df = data_manipulations.convert_pace(df)
+	
+	runtype1 = "Recovery"
+	df1 = data_manipulations.select_run_type(df, [runtype1])
+	
+	runtype2 = "Threshold"
+	df2 = data_manipulations.select_run_type(df, [runtype2])
+
+	runtype3 = "Long run"
+	df3 = data_manipulations.select_run_type(df, [runtype3])
+
+	runtype4 = "General aerobic"
+	df4 = data_manipulations.select_run_type(df, [runtype4])
+	
+	fig = plt.figure()
+ 
+	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label=runtype1)
+	ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label=runtype2)
+	ax1 = df3[variable].dropna().plot(marker='.', linewidth=1, color='purple', legend=True, label=runtype3)
+	ax1 = df4[variable].dropna().plot(marker='.', linewidth=1, color='olive', legend=True, label=runtype4)
+
+	plt.title(variable + ' Comparison by run type')
+	plt.xlabel('Date')
+	plt.ylabel(variable)
+
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + variable + " Comparison by run type.png")
+	plt.close()
+
+	return
+'''
 
 if __name__ == '__main__':
 	main()
