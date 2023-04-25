@@ -36,7 +36,7 @@ def main():
 	print("Calculating run stats...")
 	runstats.hr(df)
 	runstats.pace(df)
-	runstats.pace_by_run_type(df)
+	runstats.by_run_type(df, "GARMIN Average HR (bpm)")
 	
 	return
 
