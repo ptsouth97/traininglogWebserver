@@ -3,15 +3,5 @@
 ## Overview
 This application's purpose is to analyze data from a runner's training log
 
-## Power
-1. Average Power
-2. Efficiency Factor
-3. Intensity Factor
-## Pace
-
-## Sleep
-
-## Recovery
-1. HRV
-2. RHR
+![flowchart](https://user-images.githubusercontent.com/10027511/234387127-15b118c6-37c0-41b9-b096-b21c8c516d3f.png)
 
