@@ -29,9 +29,23 @@ def main():
 		print('\r', frame, sep='', end='', flush=True)
 		sleep(0.2)
 	'''
+
+	#body_metrics(df)
+	run_stats(df)
+
+
+def body_metrics(df):
+	''' Creates all body metric charts'''
+
 	print("Calculating body metrics...")
 	body_metrics.weight(df)
 	body_metrics.calories(df)
+
+	return
+
+
+def run_stats(df):
+	''' Creates all run stats charts'''
 
 	print("Calculating run stats...")
 	runstats.hr(df)

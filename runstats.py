@@ -46,6 +46,7 @@ def pace(df):
 
 	plot.single_variable_time_series(df, variable, 'g')
 	plot.multi_variable_time_series(df, variable)
+	plot.year_over_year(df, variable)
 
 	return
 
