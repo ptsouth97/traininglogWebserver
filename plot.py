@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import load
 import os
+import data_manipulations
 
 
 def main():
@@ -63,6 +64,40 @@ def single_variable_time_series(df, variable, color):
 	plt.savefig(path + variable + " changes over time.png")
 	plt.close()
 	#os.chdir("/home/ocros03/Website/")
+
+	return
+
+
+def multi_variable_time_series(df, variable):
+	''' Plot data by the type of run'''
+	
+	if variable == "Pace (min per mile)":
+		df = data_manipulations.convert_pace(df)
+	
+	runtype1 = "Recovery"
+	df1 = data_manipulations.select_run_type(df, [runtype1])
+	
+	runtype2 = "Threshold"
+	df2 = data_manipulations.select_run_type(df, [runtype2])
+	
+	fig = plt.figure()
+ 
+	#ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label=runtype1)
+	#ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label=runtype2)
+
+	df1[runtype1] = df1[variable].rolling(30, min_periods=15).mean()
+	ax1 = df1[runtype1].plot(legend=True)
+
+	df2[runtype2] = df2[variable].rolling(30, min_periods=15).mean()
+	ax1 = df2[runtype2].plot(legend=True)
+
+	plt.title(variable + ' SMA-30 Comparison by run type')
+	plt.xlabel('Date')
+	plt.ylabel(variable)
+
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + variable + " Comparison by run type.png")
+	plt.close()
 
 	return
 

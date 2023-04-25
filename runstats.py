@@ -32,6 +32,7 @@ def hr(df):
 	variable = "GARMIN Average HR (bpm)"
 
 	plot.single_variable_time_series(df, variable, 'r')
+	plot.multi_variable_time_series(df, variable)
 
 	return
 
@@ -44,6 +45,7 @@ def pace(df):
 	variable = "Pace (min per mile)"
 
 	plot.single_variable_time_series(df, variable, 'g')
+	plot.multi_variable_time_series(df, variable)
 
 	return
 
