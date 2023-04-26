@@ -9,7 +9,7 @@ import plot
 import body_metrics
 import runstats
 import power
-import recovery
+import recovery as rec
 from itertools import cycle
 from time import sleep
 
@@ -18,7 +18,7 @@ def main():
 	''' Load dataframe from csv file'''
 
 	# Download latest Google Sheet data as a csv file
-	#load.get_url()
+	load.get_url()
 
 	# Load csv file to a pandas dataframe
 	filename = 'trainingLog.csv'
@@ -31,7 +31,8 @@ def main():
 	'''
 
 	#body_metrics(df)
-	run_stats(df)
+	#run_stats(df)
+	recovery(df)
 
 
 def body_metrics(df):
@@ -53,6 +54,16 @@ def run_stats(df):
 		
 	return
 
+
+def recovery(df):
+	''' Creates all recovery charts'''
+
+	print("Calculating recovery...")
+	rec.hrv(df)
+	rec.rhr(df)
+	#recovery.sleep(df)
+
+	return
 
 if __name__ == '__main__':
 	main()

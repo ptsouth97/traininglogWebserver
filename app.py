@@ -21,7 +21,7 @@ def runstats():
 
 @app.route('/weight')
 def weight():
-	return render_template('weight.html')
+	return render_template('body_metrics.html')
 
 @app.route('/power')
 def power():

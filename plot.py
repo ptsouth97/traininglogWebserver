@@ -25,7 +25,7 @@ def year_over_year(df, variable):
 	''' Plot single variable year-over-year data'''
 
 	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=variable)	
-
+	
 	plt.style.use('ggplot')
 	pv.plot(marker='.', linewidth=1)
 	plt.title('Mean ' + variable + ' Year-Over-Year Comparison')
