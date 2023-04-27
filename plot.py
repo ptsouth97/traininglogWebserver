@@ -21,19 +21,19 @@ def main():
 	return
 
 
-def year_over_year(df, variable):
+def year_over_year(df, variable, runtype):
 	''' Plot single variable year-over-year data'''
 
 	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=variable)	
 	
 	plt.style.use('ggplot')
 	pv.plot(marker='.', linewidth=1)
-	plt.title('Mean ' + variable + ' Year-Over-Year Comparison')
+	plt.title('Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison')
 	plt.xlabel('Month')
 	plt.ylabel(variable)
 
 	os.chdir('./static')
-	plt.savefig('Mean ' + variable + ' Year-Over-Year Comparison.png')
+	plt.savefig('Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison.png')
 	plt.close()
 	os.chdir('..')
 
@@ -54,6 +54,8 @@ def single_variable_time_series(df, variable, color):
 	#ax = plt.axes()
 	#ax.set_facecolor("violet")
 	
+	plt.style.use('ggplot')
+
 	plt.title(variable + ' changes over time')
 	plt.xlabel('Date')
 	plt.ylabel(variable)
@@ -89,6 +91,7 @@ def multi_variable_time_series(df, variable):
 	runtype4 = "General aerobic"
 	df4 = data_manipulations.select_run_type(df, [runtype4])
 	
+	plt.style.use('ggplot')
 
 	fig = plt.figure()
  

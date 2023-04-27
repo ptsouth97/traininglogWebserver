@@ -46,8 +46,9 @@ def pace(df):
 	plot.single_variable_time_series(df, variable, 'g')
 	plot.multi_variable_time_series(df, variable)
 
-	df = data_manipulations.select_run_type(df, ["Medium long"])
-	plot.year_over_year(df, variable)
+	runtype = "Medium long"
+	df = data_manipulations.select_run_type(df, [runtype])
+	plot.year_over_year(df, variable, runtype)
 
 	return
 
