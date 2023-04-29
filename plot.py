@@ -28,7 +28,10 @@ def year_over_year(df, variable, runtype):
 	
 	plt.style.use('ggplot')
 	pv.plot(marker='.', linewidth=1)
-	plt.title('Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison')
+	plt.title('Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison',
+		fontsize=12,
+		pad=0,
+		loc="left")
 	plt.xlabel('Month')
 	plt.ylabel(variable)
 
@@ -56,7 +59,7 @@ def single_variable_time_series(df, variable, color):
 	
 	plt.style.use('ggplot')
 
-	plt.title(variable + ' changes over time')
+	plt.title(variable + ' changes over time', fontsize=14, pad=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 

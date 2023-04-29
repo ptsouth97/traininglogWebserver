@@ -17,7 +17,7 @@ def main():
 	
 	df = load.to_df(filename)
 
-	variable1 = 'Average Power (W)'
+	variable1 = 'Average Cadence (spm)'
 	variable2 = 'GARMIN Average HR (bpm)'
 
 	two_variable_correlation(df, variable1, variable2)
@@ -29,10 +29,10 @@ def two_variable_correlation(df, variable1, variable2):
 	''' Plots one variable versus another to test correlation'''
 
 	# Exclude outliers in the 1% range
-	q1 = df[variable1].quantile(0.99)
-	df = df[df[variable1] < q1]
+	q1 = df[variable1].quantile(0.1)
+	df = df[df[variable1] > q1]
 
-	q2 = df[variable2].quantile(0.99)
+	q2 = df[variable2].quantile(0.9)
 	df = df[df[variable2] < q2]
 
 	df.plot(x=variable1, y=variable2, kind='scatter')
@@ -51,7 +51,8 @@ def two_variable_correlation(df, variable1, variable2):
 	y_pred = reg.predict(prediction_space)
 
 	r2 = reg.score(X, y)
-	
+
+	#plt.style.use("ggplot")	
 	plt.plot(prediction_space, y_pred, color='red', linewidth=1)
 	plt.title(variable2 + ' versus ' + variable1 + ', r^2=' + str(round(r2,2)))
 	plt.savefig("/home/ocros03/Website/static/" + variable2 + " versus " + variable1 + ".png")

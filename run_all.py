@@ -32,7 +32,7 @@ def main():
 
 	#body_metrics(df)
 	run_stats(df)
-	#recovery(df)
+	recovery(df)
 
 
 def body_metrics(df):
