@@ -39,7 +39,8 @@ def main():
 				print(variable1 + ", " + variable2 + " -> r2 = " + str(r2))
 				results[variable1][variable2] = r2
 				results.to_csv('regression_results.csv')
-				counter += 1
+		counter += 1 # how many loops completed
+		print("Updated counter to: " + str(counter))
 
 	# variables_col.remove(variable1)
 	'''
