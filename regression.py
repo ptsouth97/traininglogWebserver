@@ -18,7 +18,7 @@ def main():
 	
 	df = load.to_df(filename)
 
-	variables = ['Elevation (ft)', 'Temperature (F)', 'Humidity (%)',
+	variables_row = ['Elevation (ft)', 'Temperature (F)', 'Humidity (%)',
 				 'Feels like', 'Distance (miles)', 'Time', 
 				 'Average Pace (min/mile)', 'GARMIN Average HR (bpm)',
 				 'Average Cadence (spm)', 'Average Power (W)',
@@ -26,10 +26,12 @@ def main():
 				 'Average Ground Contact Time (ms)', 'Max HR',
 				 'Average Stride Length (m)']
 
-	results = pd.DataFrame(columns=variables, index=variables)
+	variables_col = variables_row
 
-	for variable1 in variables:
-		for variable2 in variables:
+	results = pd.DataFrame(columns=variables_col, index=variables_row)
+
+	for variable1 in variables_row:
+		for variable2 in variables_col:
 			if variable1 == variable2:
 				continue
 			print("Calculating regression for " + variable1 + " and " + variable2)
@@ -38,7 +40,7 @@ def main():
 			results[variable1][variable2] = r2
 			results.to_csv('regression_results.csv')
 
-		variables.remove(variable1)
+		variables_col.remove(variable1)
 	'''
 	variable1 = 'Average Cadence (spm)'
 	variable2 = 'GARMIN Average HR (bpm)'
