@@ -38,6 +38,7 @@ def main():
 			results[variable1][variable2] = r2
 			results.to_csv('regression_results.csv')
 
+		variables.remove(variable1)
 	'''
 	variable1 = 'Average Cadence (spm)'
 	variable2 = 'GARMIN Average HR (bpm)'
