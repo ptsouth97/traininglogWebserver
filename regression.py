@@ -32,23 +32,14 @@ def main():
 
 	for variable1 in variables:
 		for variable2 in variables:
-			print("variable1 is: " + variable1 + ", variable2 is: " + variable2 + ", counter is: " + str(counter))
 			if variables.index(variable2) > counter:
 				print("Calculating regression for " + variable1 + " and " + variable2)
-				r2 = two_variable_correlation(df, variable1, variable2)
+				r2 = round(two_variable_correlation(df, variable1, variable2), 5)
 				print(variable1 + ", " + variable2 + " -> r2 = " + str(r2))
 				results[variable1][variable2] = r2
 				results.to_csv('regression_results.csv')
-		counter += 1 # how many loops completed
-		print("Updated counter to: " + str(counter))
+		counter += 1
 
-	# variables_col.remove(variable1)
-	'''
-	variable1 = 'Average Cadence (spm)'
-	variable2 = 'GARMIN Average HR (bpm)'
-
-	two_variable_correlation(df, variable1, variable2)
-	'''
 	return
 
 
