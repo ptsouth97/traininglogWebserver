@@ -8,6 +8,7 @@ import data_manipulations
 import plot
 import numpy as np
 from sklearn.linear_model import LinearRegression
+import csv
 
 
 def main():
@@ -25,12 +26,17 @@ def main():
 				 'Average Ground Contact Time (ms)', 'Max HR',
 				 'Average Stride Length (m)']
 
+	results = pd.DataFrame(columns=variables, index=variables)
+
 	for variable1 in variables:
 		for variable2 in variables:
 			if variable1 == variable2:
 				continue
 			print("Calculating regression for " + variable1 + " and " + variable2)
-			two_variable_correlation(df, variable1, variable2)
+			r2 = two_variable_correlation(df, variable1, variable2)
+			print(variable1 + ", " + variable2 + " -> r2 = " + str(r2))
+			results[variable1][variable2] = r2
+			results.to_csv('regression_results.csv')
 
 	'''
 	variable1 = 'Average Cadence (spm)'
@@ -52,10 +58,28 @@ def two_variable_correlation(df, variable1, variable2):
 	q2 = df[variable2].quantile(0.9)
 	df = df[df[variable2] < q2]
 	'''
+	df = df.dropna(subset=[variable1, variable2])
 
+	if variable1 == 'Time':
+		data_manipulations.convert_time(df)
+		variable1 = 'Duration (hrs)'
+
+	if variable2 == 'Time':
+		data_manipulations.convert_time(df)
+		variable2 = 'Duration (hrs)'
+
+	if variable1 == 'Average Pace (min/mile)':
+		data_manipulations.convert_pace(df)
+		variable1 = 'Pace (min per mile)'
+
+	if variable2 == 'Average Pace (min/mile)':
+		data_manipulations.convert_pace(df)
+		variable2 = 'Pace (min per mile)'
+
+	print(df[variable2])
 	df.plot(x=variable1, y=variable2, kind='scatter')
 
-	df = df.dropna(subset=[variable1, variable2])
+	#df = df.dropna(subset=[variable1, variable2])
 
 	column = pd.to_numeric(df[variable1])
 	upper_end = column.max()
@@ -78,7 +102,7 @@ def two_variable_correlation(df, variable1, variable2):
 	plt.savefig("/home/ocros03/Website/static/" + variable2 + " versus " + variable1 + ".png")
 	plt.close()
 	
-	return
+	return r2
 
 if __name__ == '__main__':
 	main()

@@ -43,6 +43,16 @@ def convert_pace(df):
 	return df
 
 
+def convert_time(df):
+	''' converts time of 1:30:00 to 1.5'''
+	
+	df['datetime'] = pd.to_datetime(df['Time'], errors='ignore')
+	df['hours'] = df['datetime'].dt.hour
+	df['minutes'] = (df['datetime'].dt.minute)/60
+	df['seconds'] = (df['datetime'].dt.second)/60/60
+	df['Duration (hrs)'] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
+
+	
 def convert_sleep(df):
 	''' converts 8:30:00 hours of sleep to 8.5 hours of sleep'''
 
