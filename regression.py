@@ -17,7 +17,7 @@ def main():
 	filename = 'trainingLog.csv'
 	
 	df = load.to_df(filename)
-
+	
 	variables = ['Elevation (ft)', 'Temperature (F)', 'Humidity (%)',
 				 'Feels like', 'Distance (miles)', 'Time', 
 				 'Average Pace (min/mile)', 'GARMIN Average HR (bpm)',
@@ -55,7 +55,7 @@ def two_variable_correlation(df, variable1, variable2):
 	df = df[df[variable2] < q2]
 	'''
 	df = df.dropna(subset=[variable1, variable2])
-
+	print(df['Time'])
 	if variable1 == 'Time':
 		data_manipulations.convert_time(df)
 		variable1 = 'Duration (hrs)'
