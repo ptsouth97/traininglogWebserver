@@ -21,7 +21,7 @@ def main():
 	return
 
 
-def year_over_year(df, variable, runtype):
+def year_over_year(df, variable, runtype=''):
 	''' Plot single variable year-over-year data'''
 
 	pv = pd.pivot_table(df, index=df.index.month, columns=df.index.year, values=variable)	

@@ -6,7 +6,7 @@ import load
 import os
 import data_manipulations
 import plot
-import body_metrics
+import body_metrics as bm
 import runstats
 import power
 import recovery as rec
@@ -30,17 +30,17 @@ def main():
 		sleep(0.2)
 	'''
 
-	#body_metrics(df)
-	run_stats(df)
-	recovery(df)
+	body_metrics(df)
+	#run_stats(df)
+	#recovery(df)
 
 
 def body_metrics(df):
 	''' Creates all body metric charts'''
 
 	print("Calculating body metrics...")
-	body_metrics.weight(df)
-	body_metrics.calories(df)
+	bm.weight(df)
+	bm.calories(df)
 
 	return
 
