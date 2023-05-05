@@ -21,6 +21,34 @@ def main():
 	return
 
 
+def distribution(df, variable):
+	''' Plot histogram of average pace'''
+
+	print("Creating distribution...")
+
+	df = df.dropna(subset=variable)	
+
+	#variable = "Average Pace (min/mile)"
+
+	if variable == 'Average Pace (min/mile)':
+		data_manipulations.convert_pace(df)
+		variable = 'Pace (min per mile)'
+
+	print(df[variable])
+
+	plt.style.use('ggplot')
+	df.plot.hist(by=[variable], bins=10)
+
+	plt.title('Histogram of ' + variable)
+	
+	os.chdir('./static')
+	plt.savefig('Histogram of ' + variable + '.png')
+	plt.close()
+	os.chdir('..')
+
+	return
+
+
 def year_over_year(df, variable, runtype=''):
 	''' Plot single variable year-over-year data'''
 

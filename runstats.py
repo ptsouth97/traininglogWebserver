@@ -7,6 +7,7 @@ import os
 import data_manipulations
 import plot
 
+
 def main():
 	''' Load dataframe from csv file'''
 
@@ -18,9 +19,9 @@ def main():
 	#print(df)
 	#run_type = "Recovery"
 	#df = data_manipulations.select_run_type(df, [run_type])
-
 	hr(df)
 	pace(df)
+	plot.distribution(df, "Average Pace (min/mile)")
 	
 	return
 

@@ -30,8 +30,8 @@ def main():
 		sleep(0.2)
 	'''
 
-	body_metrics(df)
-	#run_stats(df)
+	#body_metrics(df)
+	run_stats(df)
 	#recovery(df)
 
 
@@ -51,6 +51,7 @@ def run_stats(df):
 	print("Calculating run stats...")
 	runstats.hr(df)
 	runstats.pace(df)
+	plot.distribution(df, "Average Pace (min/mile)")
 		
 	return
 
