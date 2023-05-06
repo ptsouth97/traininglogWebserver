@@ -37,7 +37,8 @@ def distribution(df, variable):
 	print(df[variable])
 
 	plt.style.use('ggplot')
-	df.plot.hist(by=[variable], bins=10)
+	#df.plot.hist(by=[variable], bins=10)
+	df.hist(column=variable, bins=10)
 
 	plt.title('Histogram of ' + variable)
 	
