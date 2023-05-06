@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import load
 import os
 import data_manipulations
+import numpy as np
 
 
 def main():
@@ -28,17 +29,16 @@ def distribution(df, variable):
 
 	df = df.dropna(subset=variable)	
 
-	#variable = "Average Pace (min/mile)"
-
 	if variable == 'Average Pace (min/mile)':
 		data_manipulations.convert_pace(df)
 		variable = 'Pace (min per mile)'
 
-	print(df[variable])
+	q2 = df[variable].quantile(0.95)
+	df = df[df[variable] < q2]
 
 	plt.style.use('ggplot')
-	#df.plot.hist(by=[variable], bins=10)
-	df.hist(column=variable, bins=10)
+	binwidth = 0.25
+	df.hist(column=variable, bins=np.arange(min(df[variable]), max(df[variable]) + binwidth, binwidth))
 
 	plt.title('Histogram of ' + variable)
 	
