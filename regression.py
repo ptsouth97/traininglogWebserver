@@ -55,7 +55,7 @@ def two_variable_correlation(df, variable1, variable2):
 	df = df[df[variable2] < q2]
 	'''
 	df = df.dropna(subset=[variable1, variable2])
-	print(df['Time'])
+	#print(df['Time'])
 	if variable1 == 'Time':
 		data_manipulations.convert_time(df)
 		variable1 = 'Duration (hrs)'

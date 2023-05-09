@@ -51,6 +51,7 @@ def run_stats(df):
 	print("Calculating run stats...")
 	runstats.hr(df)
 	runstats.pace(df)
+	runstats.temp(df)
 	plot.distribution(df, "Average Pace (min/mile)")
 		
 	return

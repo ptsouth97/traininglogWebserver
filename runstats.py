@@ -26,6 +26,16 @@ def main():
 	return
 
 
+def temp(df):
+	''' Plot temperature data'''
+
+	variable = "Temperature (F)"
+
+	plot.single_variable_time_series(df, variable, 'r')
+
+	return
+
+
 def hr(df):
 	''' Plot heart rate data'''
 
