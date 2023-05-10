@@ -40,7 +40,9 @@ def main():
 	#fig, ax = plt.subplots()
 	plt.style.use('ggplot')
 
-	colors = {'Recovery':'red', 'Threshold':'orange', 'Medium long':'green', 'Long run':'blue', 'VO2 max':'yellow', 'General aerobic':'black', 'Progression':'cyan', 'Race':'magenta', 'Intervals':'0.8'}
+	colors = {'Recovery':'red', 'Threshold':'orange', 'Medium long':'green', 
+              'Long run':'blue', 'VO2 max':'yellow', 'General aerobic':'black', 
+              'Progression':'cyan', 'Race':'magenta', 'Intervals':'0.8'}
 
 	color_map = data['Run type'].map(colors)
 
@@ -65,7 +67,7 @@ def main():
 	#print(df.shape)
 	#print(df.keys())
 	#print(type(df.HRV))
-	'''
+	
 	X = np.array(data[predictor_variables])
 	#print(predictor)
 	#print(type(predictor)
@@ -75,18 +77,18 @@ def main():
 
 	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21, stratify=y)
 	
-	knn = KNeighborsClassifier(n_neighbors=5)
+	knn = KNeighborsClassifier(n_neighbors=4)
 
 	knn.fit(X_train, y_train)
 
 	y_pred = knn.predict(X_test)
 
 	print("Test set predictions: \n {}".format(y_pred))
-
+	print("X_test:")
 	print(X_test)
 
 	print(knn.score(X_test, y_test))
-	'''
+	
 	return
 
 
