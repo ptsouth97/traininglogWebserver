@@ -77,21 +77,23 @@ def single_variable_time_series(df, variable, color):
 
 	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
 
+	plt.style.use('ggplot')
+
 	df['SMA_30'] = df[variable].rolling(30, min_periods=15).mean()
 	df['SMA_30'].plot(legend=True)
 
-	#plt.style.use('ggplot')
 	#plt.figure(facecolor="yellow")
 
 	#ax = plt.axes()
 	#ax.set_facecolor("violet")
 	
-	plt.style.use('ggplot')
-
 	plt.title(variable + ' changes over time', fontsize=14, pad=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
+	plt.axvline(x='2021-12-11', label='Kiawah marathon 2021', color='blue')
+	plt.axvline(x='2022-12-10', label='Kiawah marathon 2022', color='green')
+	plt.legend()
 	plt.tight_layout()
 
 	path = "/home/ocros03/Website/static/"
