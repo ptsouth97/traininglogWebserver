@@ -72,7 +72,7 @@ def year_over_year(df, variable, runtype=''):
 	return
 
 
-def single_variable_time_series(df, variable, color):
+def single_variable_time_series(df, variable, color, vlines):
 	''' Plot single variable time series'''
 
 	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
@@ -91,8 +91,10 @@ def single_variable_time_series(df, variable, color):
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
-	plt.axvline(x='2021-12-11', label='Kiawah marathon 2021', color='blue')
-	plt.axvline(x='2022-12-10', label='Kiawah marathon 2022', color='green')
+	if vlines == 'Yes':
+		plt.axvline(x='2021-12-11', label='Kiawah marathon 2021', color='blue')
+		plt.axvline(x='2022-12-10', label='Kiawah marathon 2022', color='green')
+
 	plt.legend()
 	plt.tight_layout()
 

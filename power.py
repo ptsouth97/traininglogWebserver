@@ -28,7 +28,7 @@ def avgPower(df):
 
 	variable = 'Average Power (W)'
 
-	plot.single_variable_time_series(df, variable, 'r')
+	plot.single_variable_time_series(df, variable, 'r', 'No')
 
 	return
 
@@ -40,7 +40,7 @@ def efficiencyFactor(df):
 
 	df[variable] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
 
-	plot.single_variable_time_series(df, variable, 'g')
+	plot.single_variable_time_series(df, variable, 'g', 'No')
 
 	return
 
@@ -52,7 +52,7 @@ def intensityFactor(df):
 
 	df[variable] =  df['Average Power (W)'] / df['Functional Threshold Power (rFTPw)']
 
-	plot.single_variable_time_series(df, variable, 'b')
+	plot.single_variable_time_series(df, variable, 'b', 'No')
 
 	return
 

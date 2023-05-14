@@ -31,7 +31,7 @@ def temp(df):
 
 	variable = "Temperature (F)"
 
-	plot.single_variable_time_series(df, variable, 'r')
+	plot.single_variable_time_series(df, variable, 'r', 'No')
 
 	return
 
@@ -41,7 +41,7 @@ def hr(df):
 
 	variable = "GARMIN Average HR (bpm)"
 
-	plot.single_variable_time_series(df, variable, 'r')
+	plot.single_variable_time_series(df, variable, 'r', 'No')
 	plot.multi_variable_time_series(df, variable)
 
 	return
@@ -54,7 +54,7 @@ def pace(df):
 
 	variable = "Pace (min per mile)"
 
-	plot.single_variable_time_series(df, variable, 'g')
+	plot.single_variable_time_series(df, variable, 'g', 'No')
 	plot.multi_variable_time_series(df, variable)
 
 	runtypes = ["Recovery", "General aerobic", "Threshold", "Medium long", "Long run"]
