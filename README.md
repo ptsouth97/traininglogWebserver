@@ -2,4 +2,4 @@
 
 ## Overview
 This application's purpose is to analyze data from a runner's training log
-![flowchart](https://user-images.githubusercontent.com/10027511/234390907-6e5fe626-61b0-4879-b02b-51ad7a6bc7cb.png)
+![flowchart](https://github.com/ptsouth97/traininglogWebserver/assets/10027511/b2b94323-2239-42c1-9fd1-d6a4022e38dd)
