@@ -77,6 +77,8 @@ def powerVariableByRunType(df, variable):
 	runtype4 = ["Threshold"]
 	df4 = data_manipulations.select_run_type(df, runtype4)
 
+	plt.style.use("ggplot")
+
 	fig = plt.figure()
 
 	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
@@ -84,7 +86,8 @@ def powerVariableByRunType(df, variable):
 	ax1 = df3[variable].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
 	ax1 = df4[variable].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
 
-	plt.title(variable + ' changes over time')
+	plt.suptitle(variable + ' by run type', fontsize=14, fontweight="bold")
+	plt.title('What is the difference in power between different types of runs?', fontsize=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 

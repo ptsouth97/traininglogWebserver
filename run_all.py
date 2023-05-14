@@ -8,7 +8,7 @@ import data_manipulations
 import plot
 import body_metrics as bm
 import runstats
-import power
+import power as pwr
 import recovery as rec
 from itertools import cycle
 from time import sleep
@@ -30,9 +30,22 @@ def main():
 		sleep(0.2)
 	'''
 
+	power(df)
 	#body_metrics(df)
-	run_stats(df)
+	#run_stats(df)
 	#recovery(df)
+
+
+def power(df):
+	''' Creates all power charts'''
+
+	print("Calculating power...")
+	pwr.avgPower(df)
+	pwr.efficiencyFactor(df)
+	pwr.intensityFactor(df)
+	pwr.powerVariableByRunType(df, "Average Power (W)")
+
+	return
 
 
 def body_metrics(df):
