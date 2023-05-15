@@ -10,6 +10,7 @@ import body_metrics as bm
 import runstats
 import power as pwr
 import recovery as rec
+import regression as reg
 from itertools import cycle
 from time import sleep
 
@@ -30,8 +31,8 @@ def main():
 		sleep(0.2)
 	'''
 
-	power(df)
-	#body_metrics(df)
+	#power(df)
+	body_metrics(df)
 	#run_stats(df)
 	#recovery(df)
 
@@ -54,6 +55,7 @@ def body_metrics(df):
 	print("Calculating body metrics...")
 	bm.weight(df)
 	bm.calories(df)
+	reg.two_variable_correlation(df, 'Weight (pounds)', 'Body Fat %')
 
 	return
 

@@ -27,7 +27,7 @@ def weight(df):
 	variable = 'Weight (pounds)'
 
 	plot.year_over_year(df, variable)
-	plot.single_variable_time_series(df, variable, "orange")
+	plot.single_variable_time_series(df, variable, "orange", 'No')
 
 	return
 
@@ -38,7 +38,7 @@ def calories(df):
 	variable = 'Calories consumed'
 
 	plot.year_over_year(df, variable)
-	plot.single_variable_time_series(df, variable, "purple")
+	plot.single_variable_time_series(df, variable, "purple", 'No')
 
 	plt.style.use('ggplot')
 
