@@ -5,16 +5,27 @@ import keras
 from keras.layers import Dense
 from keras.models import Sequential
 import numpy as np
+import load
+import pandas as pd
 
 
 def main():
 	''' Main function for testing purposes'''
 
+	# Download latest Google Sheet data as a csv file
+	load.get_url()
+
+	# Load csv file to a pandas dataframe
+	filename = 'trainingLog.csv'
+	df = load.to_df(filename)
+	array = df.to_numpy()
+	print(array)
+'''
 	predictors, target = get_data()
 	print(predictors.shape)
 	print(target.shape)
 	specify_model(predictors, target)
-
+'''
 
 def specify_model(predictors, target):
 	''' Add hidden layer and an output layer. Fit and do optimization'''
