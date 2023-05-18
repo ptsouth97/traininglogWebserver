@@ -18,21 +18,37 @@ def main():
 	# Load csv file to a pandas dataframe
 	filename = 'trainingLog.csv'
 	df = load.to_df(filename)
-	array = df.to_numpy()
-	print(array)
-'''
-	predictors, target = get_data()
+		
+	# Select relevant columns
+	pred = df[['Weight (pounds)', 'HRV', 'RHR', 'Temperature (F)']] #, 'Distance (miles)']]
+	pred = pred.dropna()
+
+	num_rows = len(pred.index)
+
+	predictors = pred.to_numpy()
+	#print(predictors)
+
+	targ = df['Calories'] #, 'Day Strain', 'Respiratory Rate', 'Average Cadence (spm)']] #, 'Average Power (W)']]
+	targ = targ.dropna()
+	targ = targ.reset_index(drop=True)
+	print(targ)
+	targ = targ.loc[0:num_rows-1]
+	target = targ.to_numpy()
+	
+
+	#predictors, target = get_data()
 	print(predictors.shape)
 	print(target.shape)
 	specify_model(predictors, target)
-'''
+
 
 def specify_model(predictors, target):
 	''' Add hidden layer and an output layer. Fit and do optimization'''
 
 	# Save the number of columns in predictors: n_cols
 	n_cols = predictors.shape[1]
-
+	print("n_cols = " + str(n_cols))
+	print("predictors.shape[1] = " + str(predictors.shape[1]))
 	# Set up the model: model
 	model = Sequential()
 
