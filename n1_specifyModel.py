@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 
 # Import necessary modules
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import keras
 from keras.layers import Dense
 from keras.models import Sequential
+from keras.models import load_model
 import numpy as np
 import load
 import pandas as pd
+import data_manipulations as dm
 
 
 def main():
@@ -18,28 +22,62 @@ def main():
 	# Load csv file to a pandas dataframe
 	filename = 'trainingLog.csv'
 	df = load.to_df(filename)
+
+	# Manipulate columns as necessary
+	dm.convert_pace(df)
+	dm.convert_sleep(df)
 		
-	# Select relevant columns
-	pred = df[['Weight (pounds)', 'HRV', 'RHR', 'Temperature (F)']] #, 'Distance (miles)']]
-	pred = pred.dropna()
+	# Select relevant columns and drop na values
+	df = df[['Weight (pounds)', 
+				'Recovery',
+				'Day Strain',
+				'Calories',
+				'HRV', 
+				'RHR',
+				'Respiratory Rate',
+				'Sleep Performance',
+				'Total Hours of Sleep',
+				'WHOOP Avg HR (bpm)',
+				'Max HR',
+				'Temperature (F)',
+				'Pace (min per mile)']].dropna()
 
-	num_rows = len(pred.index)
-
-	predictors = pred.to_numpy()
-	#print(predictors)
-
-	targ = df['Calories'] #, 'Day Strain', 'Respiratory Rate', 'Average Cadence (spm)']] #, 'Average Power (W)']]
-	targ = targ.dropna()
-	targ = targ.reset_index(drop=True)
-	print(targ)
-	targ = targ.loc[0:num_rows-1]
+	# Select the column with the target and convert to numpy array
+	targ = df['Pace (min per mile)']
 	target = targ.to_numpy()
-	
+
+	# Drop the column with the target and convert remaining dataframe to numpy array
+	pred = df.drop(columns='Calories')
+	predictors = pred.to_numpy()
 
 	#predictors, target = get_data()
 	print(predictors.shape)
 	print(target.shape)
 	specify_model(predictors, target)
+
+	predict()
+
+
+def predict():
+	''' Make predictions'''
+
+	my_model = load_model('model_file.h5')
+
+	test_data = np.array([[165, .95, 15, 3000, 75, 45, 13.5, 100, 8, 145, 165, 70],
+								 [164, .82, 14, 3200, 72, 46, 13.8, 100, 7, 142, 169, 80]])
+	#test_data = np.transpose(test_data)
+
+	print(test_data.shape)
+
+	predictions = my_model.predict(test_data)
+
+	print("Predictions:")
+	print(predictions)
+
+	probability_true = predictions[:,0]
+	print("Probability true: " + str(probability_true))
+	
+	return
 
 
 def specify_model(predictors, target):
@@ -56,7 +94,7 @@ def specify_model(predictors, target):
 	model.add(Dense(50, activation='relu', input_shape=(n_cols,)))
 
 	# Add the second layer
-	model.add(Dense(32, activation='relu', input_shape=(n_cols,)))
+	model.add(Dense(32, activation='relu')) #, input_shape=(n_cols,)))
 
 	# Add the output layer
 	model.add(Dense(1))
@@ -69,6 +107,12 @@ def specify_model(predictors, target):
 
 	# Fit the model
 	model.fit(predictors, target, epochs=10)
+
+	# Display model summary
+	model.summary()
+
+	# Save the model
+	model.save('model_file.h5')
 
 
 def get_data():
