@@ -42,16 +42,28 @@ def main():
 				'Temperature (F)',
 				'Pace (min per mile)']].dropna()
 
-	# Select the column with the target and convert to numpy array
-	targ = df['Pace (min per mile)']
+	# Select the column with the target 
+	targ = df['Recovery']
+
+	# Drop the first recovery data point because we don't have the previous day's data
+	targ = targ.drop(index=targ.index[0], axis=0)
+
+	# Convert to numpy array
 	target = targ.to_numpy()
+	print(target)
+	# Drop the column with the target
+	pred = df.drop(columns='Recovery')
 
-	# Drop the column with the target and convert remaining dataframe to numpy array
-	pred = df.drop(columns='Calories')
+	# Drop the last row of the pred dataframe because we don't have the next day's recovery score
+	pred = pred.drop(index=pred.index[-1], axis=0)
+
+	# Convert remaining dataframe to numpy array
 	predictors = pred.to_numpy()
-
+	print(predictors)
 	#predictors, target = get_data()
+	print("PREDICTORS SHAPE:")
 	print(predictors.shape)
+	print("TARGET SHAPE:")
 	print(target.shape)
 	specify_model(predictors, target)
 
@@ -61,12 +73,14 @@ def main():
 def predict():
 	''' Make predictions'''
 
-	my_model = load_model('model_file.h5')
+	my_model = load_model('predict_recovery.h5')
 
-	test_data = np.array([[165, .95, 15, 3000, 75, 45, 13.5, 100, 8, 145, 165, 70],
-								 [164, .82, 14, 3200, 72, 46, 13.8, 100, 7, 142, 169, 80]])
+	test_data = np.array([[165, 15, 3000, 75, 45, 13.5, 100, 8, 145, 165, 70, 8],
+								 [164, 14, 3200, 72, 46, 13.8, 100, 7, 142, 169, 80, 9],
+								 [163, 14, 3100, 74, 45, 13.7, 100, 9, 144, 166, 75, 10]])
 	#test_data = np.transpose(test_data)
 
+	print("TEST DATA SHAPE:")
 	print(test_data.shape)
 
 	predictions = my_model.predict(test_data)
@@ -112,7 +126,7 @@ def specify_model(predictors, target):
 	model.summary()
 
 	# Save the model
-	model.save('model_file.h5')
+	model.save('predict_recovery.h5')
 
 
 def get_data():
