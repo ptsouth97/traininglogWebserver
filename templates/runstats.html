@@ -1,42 +1,7 @@
 {% extends 'base.html' %}
 	{% block body %}
 		<h1> Running Statistics </h1>
-		<h3> <a href="/"class="button">HOME</a></h3>
-		<div class="parent">
-			<div>
-				<img src={{url_for('static',filename="Histogram of Pace (min per mile).png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Temperature (F) changes over time.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Pace (min per mile) Comparison by run type.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Mean Medium long Pace (min per mile) Year-Over-Year Comparison.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Pace (min per mile) changes over time.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename= "GARMIN Average HR (bpm) Comparison by run type.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename= "GARMIN Average HR (bpm) changes over time.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Mean Long run Pace (min per mile) Year-Over-Year Comparison.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Mean General aerobic Pace (min per mile) Year-Over-Year Comparison.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Mean Threshold Pace (min per mile) Year-Over-Year Comparison.png")}} />
-			</div>
-			<div>
-				<img src={{url_for('static',filename="Mean Recovery Pace (min per mile) Year-Over-Year Comparison.png")}} />
-			</div>
-		</div>
-		<h3> <a href="/"class="button">HOME</a></h3>
+		<h3> <a href="/runstats_yoy"class="btn btn-primary btn-lg">Year-Over-Year Comparisons</a></h3>
+		<h3> <a href="/runstats_runtype"class="btn btn-primary btn-lg">Comparison by Run Type</a></h3>
+		<h3> <a href="/runstats_changes_over_time"class="btn btn-primary btn-lg">Changes Over Time</a></h3>
 	{% endblock %}
-

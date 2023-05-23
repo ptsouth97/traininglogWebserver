@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+	{% block body %}
+		<h1> Comparisons by Run Type </h1>
+		<h3> <a href="/runstats"class="button">Running Statistics</a></h3>
+		<div class="parent">
+			<div>
+				<img src={{url_for('static',filename="Pace (min per mile) Comparison by run type.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename= "GARMIN Average HR (bpm) Comparison by run type.png")}} />
+			</div>
+		</div>
+		<h3> <a href="/"class="button">HOME</a></h3>
+	{% endblock %}
+

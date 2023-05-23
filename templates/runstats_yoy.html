@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+	{% block body %}
+		<h1> Year-Over-Year Comparisons </h1>
+		<h3> <a href="/runstats"class="button">Running Statistics</a></h3>
+		<div class="parent">
+			<div>
+				<img src={{url_for('static',filename="Mean Medium long Pace (min per mile) Year-Over-Year Comparison.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename="Mean Long run Pace (min per mile) Year-Over-Year Comparison.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename="Mean General aerobic Pace (min per mile) Year-Over-Year Comparison.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename="Mean Threshold Pace (min per mile) Year-Over-Year Comparison.png")}} />
+			</div>
+			<div>
+				<img src={{url_for('static',filename="Mean Recovery Pace (min per mile) Year-Over-Year Comparison.png")}} />
+			</div>
+		</div>
+		<h3> <a href="/"class="button">HOME</a></h3>
+	{% endblock %}
+

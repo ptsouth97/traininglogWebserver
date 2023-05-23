@@ -54,7 +54,7 @@ def two_variable_correlation(df, variable1, variable2):
 	q2 = df[variable2].quantile(0.9)
 	df = df[df[variable2] < q2]
 	'''
-	df = df.dropna(subset=[variable1, variable2])
+	df = df.dropna(subset=[variable1, variable2, 'Run type'])
 	#print(df['Time'])
 	if variable1 == 'Time':
 		data_manipulations.convert_time(df)
@@ -72,10 +72,24 @@ def two_variable_correlation(df, variable1, variable2):
 		data_manipulations.convert_pace(df)
 		variable2 = 'Pace (min per mile)'
 
-	print(df[variable2])
-	df.plot(x=variable1, y=variable2, kind='scatter')
+	print(df)
+	
+	colors = {'Recovery':'red',
+			  'Threshold':'green',
+			  'Medium long':'blue',
+			  'Long run':'yellow',
+			  'VO2 max':'purple',
+			  'General aerobic':'orange',
+			  'Progression':'brown',
+			  'Race':'black'}
+
+	#df.plot(x=variable1, y=variable2, kind='scatter', c=df['Run type'].map(colors))
 
 	#df = df.dropna(subset=[variable1, variable2])
+
+	fig, ax = plt.subplots()
+
+	ax.scatter(df[variable1], df[variable2], c=df['Run type'].map(colors))
 
 	column = pd.to_numeric(df[variable1])
 	upper_end = column.max()

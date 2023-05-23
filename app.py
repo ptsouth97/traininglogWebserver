@@ -19,6 +19,18 @@ def index():
 def runstats():
 	return render_template('runstats.html')
 
+@app.route('/runstats_yoy')
+def runstats_yoy():
+	return render_template('runstats_yoy.html')
+
+@app.route('/runstats_changes_over_time')
+def runstats_changes_over_time():
+	return render_template('runstats_changes_over_time.html')
+
+@app.route('/runstats_runtype')
+def runstats_runtype():
+	return render_template('runstats_runtype.html')
+
 @app.route('/weight')
 def weight():
 	return render_template('body_metrics.html')
@@ -50,4 +62,4 @@ def add_header(response):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=80)
+	app.run(host='0.0.0.0', debug=True, port=5000)
