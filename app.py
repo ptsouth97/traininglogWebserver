@@ -39,6 +39,14 @@ def weight():
 def power():
 	return render_template('power.html')
 
+@app.route('/power_changes_over_time')
+def power_changes_over_time():
+	return render_template('power_changes_over_time.html')
+
+@app.route('/power_runtype')
+def power_runtype():
+	return render_template('power_runtype.html')
+
 @app.route('/recovery')
 def recovery():
 	return render_template('recovery.html')

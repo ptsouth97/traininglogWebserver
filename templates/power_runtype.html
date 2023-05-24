@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+	{% block body %}
+		<h1> Power By Run Type </h1>
+		<h3> <a href="/"class="button">HOME</a></h3>
+		<div class="parent">
+			<div>
+				<img src={{url_for('static', filename="Average Power (W) by run type.png")}} />	
+			</div>
+			<div>
+				<img src={{url_for('static', filename="Efficiency Factor by run type changes over time.png")}} />
+			</div>
+		</div>
+		<h3> <a href="/"class="button">HOME</a></h3>
+	{% endblock %}
+
