@@ -31,8 +31,8 @@ def main():
 		sleep(0.2)
 	'''
 
-	#power(df)
-	body_metrics(df)
+	power(df)
+	#body_metrics(df)
 	#run_stats(df)
 	#recovery(df)
 
@@ -44,7 +44,7 @@ def power(df):
 	pwr.avgPower(df)
 	pwr.efficiencyFactor(df)
 	pwr.intensityFactor(df)
-	pwr.powerVariableByRunType(df, "Average Power (W)")
+	pwr.powerVariableByRunType(df, "Efficiency Factor by run type")
 
 	return
 

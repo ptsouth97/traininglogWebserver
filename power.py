@@ -16,6 +16,7 @@ def main():
 	df = load.to_df(filename)
 	
 	avgPower(df)
+	efficiencyIndex(df)
 	efficiencyFactor(df)
 	intensityFactor(df)
 	powerVariableByRunType(df, "Average Power (W)")
@@ -33,8 +34,22 @@ def avgPower(df):
 	return
 
 
+def efficiencyIndex(df):
+	''' EI = Avg Speed / Avg Power, i.e., what is your speed per watt?'''
+
+	variable = 'Efficiency Index'
+
+	df = data_manipulations.convert_pace(df)
+
+	df[variable] = df['Pace (min per mile)'] / df['Average Power (W)']
+
+	plot.single_variable_time_series(df, variable, 'b', 'No')
+
+	return
+
+
 def efficiencyFactor(df):
-	''' Average Power divided by Average Heart Rate, i.e., how aerobically efficient is your running?'''
+	''' EF = Average Power divided by Average Heart Rate, i.e., how aerobically efficient is your running?'''
 
 	variable = 'Efficiency Factor'
 
@@ -87,7 +102,10 @@ def powerVariableByRunType(df, variable):
 	ax1 = df4[variable].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
 
 	plt.suptitle(variable + ' by run type', fontsize=14, fontweight="bold")
-	plt.title('What is the difference in power between different types of runs?', fontsize=10, loc="left")
+	title = getTitle(variable)
+
+	plt.title(title, fontsize=10, loc="left")
+	#plt.title('What is the difference in power between different types of runs?', fontsize=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
@@ -97,6 +115,18 @@ def powerVariableByRunType(df, variable):
 	os.chdir('..')
 
 	return
+
+
+def getTitle(variable):
+	''' Returns the correct chart title based on the variable'''
+
+	if variable =='Average Power (W)':
+		title = 'What is the difference in power between different types of runs?'
+	elif variable == 'Efficiency Factor by run type':
+		title = 'How aerobically efficient is your running? (EF=AvgPwr/AvgHR)'
+	
+
+	return title
 
 
 if __name__ == '__main__':
