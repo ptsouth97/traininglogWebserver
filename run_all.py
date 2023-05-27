@@ -44,7 +44,7 @@ def power(df):
 	pwr.avgPower(df)
 	pwr.efficiencyFactor(df)
 	pwr.intensityFactor(df)
-	pwr.powerVariableByRunType(df, "Efficiency Factor by run type")
+	pwr.powerVariableByRunType(df)
 
 	return
 

@@ -27,6 +27,8 @@ def main():
 def avgPower(df):
 	''' Plot average power data'''
 
+	print("Calculating Average Power...")
+
 	variable = 'Average Power (W)'
 
 	plot.single_variable_time_series(df, variable, 'r', 'No')
@@ -36,6 +38,8 @@ def avgPower(df):
 
 def efficiencyIndex(df):
 	''' EI = Avg Speed / Avg Power, i.e., what is your speed per watt?'''
+
+	print("Calculating Efficiency Index...")
 
 	variable = 'Efficiency Index'
 
@@ -51,6 +55,8 @@ def efficiencyIndex(df):
 def efficiencyFactor(df):
 	''' EF = Average Power divided by Average Heart Rate, i.e., how aerobically efficient is your running?'''
 
+	print("Calculating Efficiency Factor...")
+
 	variable = 'Efficiency Factor'
 
 	df[variable] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
@@ -63,6 +69,8 @@ def efficiencyFactor(df):
 def intensityFactor(df):
 	''' Critical Power divided by Average Power, i.e., how hard are you running?'''
 
+	print("Calculating Intensity Factor...")
+
 	variable = 'Intensity Factor'
 
 	df[variable] =  df['Average Power (W)'] / df['Functional Threshold Power (rFTPw)']
@@ -72,13 +80,18 @@ def intensityFactor(df):
 	return
 
 
-def powerVariableByRunType(df, variable):
-	''' Average Power divided by Average Heart Rate sorted by run type'''
+def powerVariableByRunType(df):
+	''' Power metrics sorted by run type'''
 
-	#variable = 'Efficiency Factor by run type'
-	
-	if variable == "Efficiency Factor by run type":
-		df[variable] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
+	print("Calculating power metrics by run type")
+
+	metrics = ["Average Power (W)", "Efficiency Index", "Efficiency Factor", "Intensity Factor"]	
+
+	df = data_manipulations.convert_pace(df)	
+
+	df['Efficiency Index'] = df['Pace (min per mile)'] / df['Average Power (W)']
+	df['Efficiency Factor'] = df['Average Power (W)'] / df['GARMIN Average HR (bpm)']
+	df['Intensity Factor'] =  df['Average Power (W)'] / df['Functional Threshold Power (rFTPw)']
 
 	runtype1 = ["Recovery"]
 	df1 = data_manipulations.select_run_type(df, runtype1)
@@ -92,27 +105,29 @@ def powerVariableByRunType(df, variable):
 	runtype4 = ["Threshold"]
 	df4 = data_manipulations.select_run_type(df, runtype4)
 
-	plt.style.use("ggplot")
+	for metric in metrics:
 
-	fig = plt.figure()
+		plt.style.use("ggplot")
 
-	ax1 = df1[variable].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
-	ax1 = df2[variable].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label="Long runs")
-	ax1 = df3[variable].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
-	ax1 = df4[variable].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
+		fig = plt.figure()
 
-	plt.suptitle(variable + ' by run type', fontsize=14, fontweight="bold")
-	title = getTitle(variable)
+		ax1 = df1[metric].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
+		ax1 = df2[metric].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label="Long runs")
+		ax1 = df3[metric].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
+		ax1 = df4[metric].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
 
-	plt.title(title, fontsize=10, loc="left")
-	#plt.title('What is the difference in power between different types of runs?', fontsize=10, loc="left")
-	plt.xlabel('Date')
-	plt.ylabel(variable)
+		plt.suptitle(metric + ' by run type', fontsize=14, fontweight="bold")
+		title = getTitle(metric)
 
-	os.chdir('./static')
-	plt.savefig(variable + ' by run type.png')
-	plt.close()
-	os.chdir('..')
+		plt.title(title, fontsize=10, loc="left")
+		#plt.title('What is the difference in power between different types of runs?', fontsize=10, loc="left")
+		plt.xlabel('Date')
+		plt.ylabel(metric)
+
+		os.chdir('./static')
+		plt.savefig(metric + ' by run type.png')
+		plt.close()
+		os.chdir('..')
 
 	return
 
@@ -122,10 +137,13 @@ def getTitle(variable):
 
 	if variable =='Average Power (W)':
 		title = 'What is the difference in power between different types of runs?'
-	elif variable == 'Efficiency Factor by run type':
+	elif variable == 'Efficiency Index':
+		title = 'What is your speed per watt? (Avg Speed/Avg Pwr)'
+	elif variable == 'Efficiency Factor':
 		title = 'How aerobically efficient is your running? (EF=AvgPwr/AvgHR)'
+	elif variable == 'Intensity Factor':
+		title = 'How hard are your running? (Avg Pwr/Critical Pwr)'
 	
-
 	return title
 
 
