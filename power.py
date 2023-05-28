@@ -114,7 +114,7 @@ def powerVariableByRunType(df):
 		ax1 = df1[metric].dropna().plot(marker='.', linewidth=1, color='m', legend=True, label="Recovery runs")
 		ax1 = df2[metric].dropna().plot(marker='.', linewidth=1, color='c', legend=True, label="Long runs")
 		ax1 = df3[metric].dropna().plot(marker='.', linewidth=1, color='g', legend=True, label="General aerobic runs")
-		ax1 = df4[metric].dropna().plot(marker='.', linewidth=1, color='r', legend=True, label="Threshold runs")
+		ax1 = df4[metric].dropna().plot(marker='.', linewidth=1, color='coral', legend=True, label="Threshold runs")
 
 		plt.suptitle(metric + ' by run type', fontsize=14, fontweight="bold")
 		title = getTitle(metric)
