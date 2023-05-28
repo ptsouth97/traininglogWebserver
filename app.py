@@ -15,6 +15,10 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 def index():
 	return render_template('index.html')
 
+@app.route('/snapshot')
+def snapshot():
+	return render_template('snapshot.html')
+
 @app.route('/runstats')
 def runstats():
 	return render_template('runstats.html')

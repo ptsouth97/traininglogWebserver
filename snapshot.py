@@ -14,6 +14,8 @@ def main():
 
 	df = filter_dates(df, pd.Timestamp.today() - timedelta(7), pd.Timestamp.today())
 	print(df)
+	basic_plot(df, 'HRV', 'red')
+
 	return
 
 
@@ -24,6 +26,27 @@ def filter_dates(df, start, end):
 
 	return df
 
+
+def basic_plot(df, variable, color):
+	''' Plot single variable time series'''
+
+	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
+
+	plt.style.use('ggplot')
+
+	plt.title(variable + ' this week', fontsize=14, pad=10, loc="left")
+	plt.xlabel('Date')
+	plt.ylabel(variable)
+
+	plt.legend()
+	plt.tight_layout()
+
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + variable + " this week.png")
+	plt.close()
+	#os.chdir("/home/ocros03/Website/")
+
+	return
 
 def select_run_type(df, run_type):
 	''' select specific type of run only from dataframe'''
@@ -64,41 +87,6 @@ def convert_sleep(df):
 	df['Total Hours of Sleep'] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
 
 	return df
-
-
-def two_variable_correlation(df, variable1, variable2):
-	''' Plots one variable versus another to test correlation'''
-
-	# Exclude outliers in the 1% range
-	q1 = df[variable1].quantile(0.9)
-	df = df[df[variable1] < q1]
-
-	q2 = df[variable2].quantile(0.99)
-	df = df[df[variable2] < q2]
-
-	df.plot(x=variable1, y=variable2, kind='scatter')
-
-	df = df.dropna(subset=[variable1, variable2])
-
-	column = df[variable1]
-	upper_end = column.max()
-	lower_end = column.min()
-
-	reg = LinearRegression()
-	prediction_space = np.linspace(lower_end, upper_end).reshape(-1,1)
-	X = df[variable1].values.reshape(-1,1)
-	y = df[variable2].values.reshape(-1,1)
-	reg.fit(X,y)
-	y_pred = reg.predict(prediction_space)
-
-	r2 = reg.score(X, y)
-	
-	plt.plot(prediction_space, y_pred, color='red', linewidth=1)
-	plt.title(variable2 + ' versus ' + variable1 + ', r^2=' + str(round(r2,2)))
-	plt.savefig("/home/ocros03/Website/static/regression.png")
-	plt.close()
-	
-	return
 
 
 if __name__ == '__main__':
