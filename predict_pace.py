@@ -25,7 +25,7 @@ def main():
 
 	# Manipulate columns as necessary
 	dm.convert_pace(df)
-	dm.convert_sleep(df)
+	dm.convert_sleep(df, 'WHOOP Total Hours of Sleep', 'WHOOP Total Sleep (hrs)')
 		
 	# Select relevant columns and drop na values
 	df = df[['Weight (pounds)', 
@@ -36,7 +36,7 @@ def main():
 				'RHR',
 				'Respiratory Rate',
 				'Sleep Performance',
-				'Total Hours of Sleep',
+				'WHOOP Total Sleep (hrs)',
 				'WHOOP Avg HR (bpm)',
 				'Max HR',
 				'Temperature (F)',
