@@ -13,8 +13,11 @@ def main():
 	df = load.to_df('trainingLog.csv')
 
 	df = filter_dates(df, pd.Timestamp.today() - timedelta(7), pd.Timestamp.today())
-	print(df)
-	basic_plot(df, 'HRV', 'red')
+
+	metrics = ['HRV', 'RHR', 'Training Load', 'Calories consumed']
+
+	for metric in metrics:
+		basic_plot(df, metric, 'red')
 
 	return
 
@@ -30,11 +33,16 @@ def filter_dates(df, start, end):
 def basic_plot(df, variable, color):
 	''' Plot single variable time series'''
 
-	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
+	mean = df[variable].mean()
 
 	plt.style.use('ggplot')
 
-	plt.title(variable + ' this week', fontsize=14, pad=10, loc="left")
+	df[variable].dropna().plot(marker='.', linewidth=1, color=color)
+
+	plt.axhline(y=mean, color='b', linestyle='dashed')
+	#plt.annotate('Mean = ' + str(mean),xy=(i)
+
+	plt.title(variable + ' this week (7 days)', fontsize=14, pad=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
