@@ -5,6 +5,7 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 import numpy as np
 import load
+import data_manipulations
 
 
 def main():
@@ -14,7 +15,9 @@ def main():
 
 	df = filter_dates(df, pd.Timestamp.today() - timedelta(7), pd.Timestamp.today())
 
-	metrics = ['HRV', 'RHR', 'Training Load', 'Calories consumed']
+	df = data_manipulations.convert_sleep(df, 'WHOOP Total Hours of Sleep', 'WHOOP Total Sleep (hrs)')
+
+	metrics = ['HRV', 'RHR', 'Training Load', 'Calories consumed', 'WHOOP Total Sleep (hrs)']
 
 	for metric in metrics:
 		basic_plot(df, metric, 'red')

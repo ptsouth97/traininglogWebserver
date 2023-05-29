@@ -45,11 +45,12 @@ def rhr(df):
 def sleep(df):
 	''' Plot WHOOP total sleep data'''
 
-	metric = "Total Hours of Sleep"
+	old_metric = "WHOOP Total Hours of Sleep"
+	new_metric = "WHOOP Total Sleep (hrs)"
 
-	df = data_manipulations.convert_sleep(df)
+	df = data_manipulations.convert_sleep(df, old_metric, new_metric )
 
-	plot.year_over_year(df, metric)
+	plot.year_over_year(df, new_metric)
 
 	return
 

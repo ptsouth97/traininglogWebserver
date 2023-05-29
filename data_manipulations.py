@@ -53,14 +53,14 @@ def convert_time(df):
 	df['Duration (hrs)'] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
 
 	
-def convert_sleep(df):
+def convert_sleep(df, old_metric, new_metric):
 	''' converts 8:30:00 hours of sleep to 8.5 hours of sleep'''
 
-	df['datetime'] = pd.to_datetime(df['WHOOP Total Hours of Sleep'])
+	df['datetime'] = pd.to_datetime(df[old_metric])
 	df['hours'] = df['datetime'].dt.hour
 	df['minutes'] = (df['datetime'].dt.minute)/60
 	df['seconds'] = (df['datetime'].dt.second)/60/60
-	df['Total Hours of Sleep'] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
+	df[new_metric] = round(df['hours'] + df['minutes'] + df['seconds'], 2)
 
 	return df
 
