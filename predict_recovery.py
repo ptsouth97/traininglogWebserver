@@ -50,6 +50,7 @@ def main():
 
 	# Convert to numpy array
 	target = targ.to_numpy()
+	print("RECOVERY TARGET DATA...")
 	print(target)
 	# Drop the column with the target
 	pred = df.drop(columns='Recovery')
@@ -67,7 +68,7 @@ def main():
 	print(target.shape)
 	specify_model(predictors, target)
 
-	predict()
+	#predict()
 
 
 def predict():
@@ -97,6 +98,26 @@ def predict():
 def specify_model(predictors, target):
 	''' Add hidden layer and an output layer. Fit and do optimization'''
 
+	# Network and training parameters
+	VALIDATION_SPLIT = 0.2 # How much TRAIN is reserved for validation
+	EPOCHS = 10
+	VERBOSE = 1
+
+	n_rows = predictors.shape[0]
+	print("Number of rows = " + str(n_rows))
+
+	split_point = round(n_rows*.9)
+
+	X_train = predictors[0:split_point]
+	X_test = predictors[split_point+1:-1]
+	#X_train = X_train.astype('float32')
+	#X_test = X_test.astype('float32')
+
+	Y_train = target[0:split_point]
+	Y_test = target[split_point+1:-1]
+	#Y_train = Y_train.astype('float32')
+	#Y_test = Y_test.astype('float32')
+
 	# Save the number of columns in predictors: n_cols
 	n_cols = predictors.shape[1]
 	print("n_cols = " + str(n_cols))
@@ -114,13 +135,17 @@ def specify_model(predictors, target):
 	model.add(Dense(1))
 
 	# Compile the model
-	model.compile(optimizer='adam', loss='mean_squared_error')
+	model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
 	# Verify that model contains information from compiling
 	print("Loss function: " + model.loss)
 
 	# Fit the model
-	model.fit(predictors, target, epochs=10)
+	model.fit(X_train, Y_train, epochs=EPOCHS, verbose=VERBOSE)
+
+	# Evaluate the model
+	test_loss, test_acc = model.evaluate(X_test, Y_test)
+	print('Test accuracy: ', test_acc)
 
 	# Display model summary
 	model.summary()
