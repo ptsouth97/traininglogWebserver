@@ -13,14 +13,17 @@ def main():
 
 	df = load.to_df('trainingLog.csv')
 
-	df = filter_dates(df, pd.Timestamp.today() - timedelta(7), pd.Timestamp.today())
-
 	df = data_manipulations.convert_sleep(df, 'WHOOP Total Hours of Sleep', 'WHOOP Total Sleep (hrs)')
+
+	df_7 = filter_dates(df, pd.Timestamp.today() - timedelta(7), pd.Timestamp.today())
+	df_28 = filter_dates(df, pd.Timestamp.today() - timedelta(28), pd.Timestamp.today())
 
 	metrics = ['HRV', 'RHR', 'Training Load', 'Calories consumed', 'WHOOP Total Sleep (hrs)']
 
 	for metric in metrics:
-		basic_plot(df, metric, 'red')
+		basic_plot(df_7, metric, 'red', ' this week')
+
+	basic_plot(df_28, 'HRV', 'red', ' this month')
 
 	return
 
@@ -33,7 +36,7 @@ def filter_dates(df, start, end):
 	return df
 
 
-def basic_plot(df, variable, color):
+def basic_plot(df, variable, color, period):
 	''' Plot single variable time series'''
 
 	mean = df[variable].mean()
@@ -45,7 +48,7 @@ def basic_plot(df, variable, color):
 	plt.axhline(y=mean, color='b', linestyle='dashed')
 	#plt.annotate('Mean = ' + str(mean),xy=(i)
 
-	plt.title(variable + ' this week (7 days)', fontsize=14, pad=10, loc="left")
+	plt.title(variable + period, fontsize=14, pad=10, loc="left")
 	plt.xlabel('Date')
 	plt.ylabel(variable)
 
@@ -53,11 +56,12 @@ def basic_plot(df, variable, color):
 	plt.tight_layout()
 
 	path = "/home/ocros03/Website/static/"
-	plt.savefig(path + variable + " this week.png")
+	plt.savefig(path + variable + period + ".png")
 	plt.close()
 	#os.chdir("/home/ocros03/Website/")
 
 	return
+
 
 def select_run_type(df, run_type):
 	''' select specific type of run only from dataframe'''
