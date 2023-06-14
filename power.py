@@ -2,6 +2,8 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
 import load
 import os
 import data_manipulations
@@ -125,7 +127,7 @@ def powerVariableByRunType(df):
 		plt.ylabel(metric)
 
 		#os.chdir('./static')
-		path = '/home/ocros03/Website/'
+		path = '/home/ocros03/Website/static'
 		plt.savefig(path + metric + ' by run type.png')
 		plt.close()
 		#os.chdir('..')

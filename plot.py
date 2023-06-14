@@ -2,6 +2,8 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
 import load
 import os
 import data_manipulations
