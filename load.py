@@ -14,7 +14,7 @@ def main():
 
 	get_url()
 
-	file_name = "trainingLog.csv"
+	file_name = "/home/ocros03/Website/trainingLog.csv"
 
 	df = to_df(file_name)
 	#print(df)
@@ -25,7 +25,7 @@ def main():
 def get_url():
 	''' downloads google sheet to .csv'''
 
-	os.system("sh script.sh")
+	os.system("sh /home/ocros03/Website/script.sh")
 		
 	return
 

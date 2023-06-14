@@ -18,12 +18,13 @@ from time import sleep
 def main():
 	''' Load dataframe from csv file'''
 
-	# Download latest Google Sheet data as a csv file
-	load.get_url()
+	# Download latest Google Sheet data as a csv file (using script.sh instead)
+	# load.get_url()
 
 	# Load csv file to a pandas dataframe
-	filename = 'trainingLog.csv'
+	filename = '/home/ocros03/Website/trainingLog.csv'
 	df = load.to_df(filename)
+	print('File loaded to df...')
 
 	'''	
 	for frame in cycle(r'-\|/'):

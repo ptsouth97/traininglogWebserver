@@ -124,10 +124,11 @@ def powerVariableByRunType(df):
 		plt.xlabel('Date')
 		plt.ylabel(metric)
 
-		os.chdir('./static')
-		plt.savefig(metric + ' by run type.png')
+		#os.chdir('./static')
+		path = '/home/ocros03/Website/'
+		plt.savefig(path + metric + ' by run type.png')
 		plt.close()
-		os.chdir('..')
+		#os.chdir('..')
 
 	return
 

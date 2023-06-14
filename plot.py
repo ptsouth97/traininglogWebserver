@@ -42,10 +42,11 @@ def distribution(df, variable):
 
 	plt.title('Histogram of ' + variable)
 	
-	os.chdir('./static')
-	plt.savefig('Histogram of ' + variable + '.png')
+	#os.chdir('./static')
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + 'Histogram of ' + variable + '.png')
 	plt.close()
-	os.chdir('..')
+	#os.chdir('..')
 
 	return
 
@@ -64,10 +65,11 @@ def year_over_year(df, variable, runtype=''):
 	plt.xlabel('Month')
 	plt.ylabel(variable)
 
-	os.chdir('./static')
-	plt.savefig('Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison.png')
+	#os.chdir('./static')
+	path = "/home/ocros03/Website/static/"
+	plt.savefig(path + 'Mean ' + runtype + ' ' + variable + ' Year-Over-Year Comparison.png')
 	plt.close()
-	os.chdir('..')
+	#os.chdir('..')
 
 	return
 
