@@ -127,7 +127,7 @@ def powerVariableByRunType(df):
 		plt.ylabel(metric)
 
 		#os.chdir('./static')
-		path = '/home/ocros03/Website/static'
+		path = '/home/ocros03/Website/static/'
 		plt.savefig(path + metric + ' by run type.png')
 		plt.close()
 		#os.chdir('..')

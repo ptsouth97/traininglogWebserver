@@ -3,6 +3,8 @@
 import pandas as pd
 from datetime import timedelta
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
 import numpy as np
 import load
 import data_manipulations
